@@ -1,0 +1,16 @@
+# cloudbuild.yaml
+steps:
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-github-api'            # 👈 Change this to your service name
+      - '--source=.'               # 👈 Deploy code directly
+      - '--region=us-central1'     # 👈 Your GCP region
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+
+timeout: 900s
