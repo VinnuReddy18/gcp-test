@@ -1,10 +1,25 @@
-// index.js
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// Parse JSON
+app.use(express.json());
+
+// GET Route
 app.get('/', (req, res) => {
-  res.send('🚀 Hello from GitHub → GCP Cloud Run!');
+  res.json({
+    status: 'success',
+    message: '🚀 Hello from Cloud Run!',
+    time: new Date(),
+  });
+});
+
+// POST Route (optional)
+app.post('/echo', (req, res) => {
+  res.json({
+    received: req.body,
+    message: '✅ POST received and echoed back!',
+  });
 });
 
 app.listen(PORT, () => {
